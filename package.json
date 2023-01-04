@@ -1,6 +1,6 @@
 {
   "name": "tm_server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Get all the server in multiple languages in one place",
   "keywords": [
     "server",
@@ -20,9 +20,9 @@
     "node": ">= 14"
   },
   "scripts": {
-    "develop": "tsx watch ./src/main.ts",
+    "dev": "tsx watch ./src/main.ts",
     "start": "node ./build/main.js",
-    "compile": "tsup ./src/main.ts",
+    "build": "tsup ./src/main.ts",
     "test:tsc": "tsc --project tsconfig.json",
     "lint:code": "eslint --max-warnings 0 src/**/*.ts",
     "lint:style": "prettier --check --ignore-path .gitignore .",
