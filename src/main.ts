@@ -52,7 +52,7 @@ if (configError || !config) {
   exit(1);
 }
 
-const message = chalk.green('Serving!');
+const message = chalk.green('Welcome 🙌 to "Template Master"');
 logger.log(
   boxen(message, {
     padding: 1,
