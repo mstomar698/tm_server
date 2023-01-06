@@ -1,4 +1,3 @@
-// source/utilities/promise.ts
 // Exports Promise-related utilities.
 
 /**
@@ -21,7 +20,5 @@ export const resolve = async <T = unknown, E = Error>(
   }
 };
 
-/**
- * Promisifies the passed function.
- */
+// Work as the async function
 export { promisify } from 'node:util';
