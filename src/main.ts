@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { cwd as getPwd, exit } from 'node:process';
-import path from 'node:path';
+import { exit } from 'node:process';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import manifest from '../package.json';
-import { parseArguments, getHelpText } from './utils/cli.js';
+import { parseArguments, script, getHelpText } from './utils/cli.js';
 import { logger } from './utils/logger.js';
 import { resolve } from './utils/promise.js';
-import type { DisplayValue } from './types';
+import type { Args, DisplayValue, Path } from './types';
 
+// Welcome message on random call
 const message = chalk.green('Welcome 🙌 to "Template Master"');
 
 // Parse the options passed by the user.
@@ -19,6 +19,9 @@ if (parseError || !args) {
   logger.error(parseError.message);
   exit(0);
 }
+
+// npm directory file location
+const MainPath: Path = process.env.APPDATA;
 
 if (args['--help']) {
   logger.log(getHelpText());
@@ -30,23 +33,68 @@ if (args['--version']) {
   registerClose(0);
 }
 
-if (args['--long']) {
-  console(message);
+if (args['--express']) {
+  const passedFile: Args = 'server_express.js';
+  const resultFile: Args = 'server.js';
+  const fileCreated: Args = 'Express Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
   registerClose(0);
 }
 
-// Path of the directory.
-const presentDirectory = getPwd();
-const directoryToServe = args._[0] ? path.resolve(args._[0]) : presentDirectory;
+if (args['--static']) {
+  const passedFile: Args = 'server_http.js';
+  const resultFile: Args = 'index.js';
+  const fileCreated: Args = 'Static HTTP Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
+
+if (args['--flask']) {
+  const passedFile: Args = 'server_flask.py';
+  const resultFile: Args = 'server.py';
+  const fileCreated: Args = 'Flask Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
+
+if (args['--java']) {
+  const passedFile: Args = 'server_java.java';
+  const resultFile: Args = 'MyServer.java';
+  const fileCreated: Args = 'Java Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
+
+if (args['--go']) {
+  const passedFile: Args = 'server_go.go';
+  const resultFile: Args = 'server.go';
+  const fileCreated: Args = 'GO Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
+
+if (args['--rust']) {
+  const passedFile: Args = 'server_rust.rs';
+  const resultFile: Args = 'server.rs';
+  const fileCreated: Args = 'Rust Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
+
+if (args['--php']) {
+  const passedFile: Args = 'server_php.php';
+  const resultFile: Args = 'server.php';
+  const fileCreated: Args = 'PHP Server';
+  script(MainPath, passedFile, resultFile, fileCreated);
+  registerClose(0);
+}
 
 // Function to close or exit the terminal
 function registerClose(x: number) {
   if (x === 0) {
-    logger.log();
     logger.info('Gracefully shutting down. Please wait...');
     exit(1);
   } else {
-    logger.log();
     logger.warn('Force-closing...');
     exit(0);
   }
@@ -64,5 +112,3 @@ function console(Value: DisplayValue) {
   return consoleDisplay;
 }
 console(message);
-console(presentDirectory);
-console(directoryToServe);
