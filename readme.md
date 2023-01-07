@@ -14,7 +14,7 @@ $ npm run dev
 
 > All commands available are:
 
-![Image](./src/assets/Screenshot%202023-01-08%20023000.png)
+![Image](./assets/Screenshot%202023-01-08%20023000.png)
 
 <br>
 
@@ -22,4 +22,7 @@ $ npm run dev
 > Check versions @1.X.X for Javascript
 
 ###### By: Mayank Singh Tomar
+
+```
+
 ```
