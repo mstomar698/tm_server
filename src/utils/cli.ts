@@ -66,6 +66,13 @@ const helpText = chalkTemplate`
 `;
 
 /**
+ * Returns the help text.
+ *
+ * @returns The help text shown when the `--help` option is used.
+ */
+export const getHelpText = (): string => helpText;
+
+/**
  * Parses the program's `process.argv` and returns the options and arguments.
  *
  * @returns The parsed options and arguments.
@@ -85,9 +92,18 @@ export const script = (
   logger.log(`${argument4} has been created successfully,👍`);
 };
 
-/**
- * Returns the help text.
- *
- * @returns The help text shown when the `--help` option is used.
- */
-export const getHelpText = (): string => helpText;
+export const npmInsatallation = (argument1: Args, argument2: Args) => {
+  shell.exec(`npm install ${argument1} ${argument2}`);
+  logger.log(`${argument1 + argument2} has been installed successfully,👍`);
+};
+
+export const otherInstallations = (
+  argument1: Args,
+  argument2: Args,
+  argument3: Args,
+) => {
+  shell.exec(`${argument1} ${argument2} ${argument3}`);
+  logger.log(
+    `${argument1 + argument2 + argument3} has been installed successfully,👍`,
+  );
+};

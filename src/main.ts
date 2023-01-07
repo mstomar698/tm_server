@@ -4,7 +4,7 @@ import { exit } from 'node:process';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import manifest from '../package.json';
-import { parseArguments, script, getHelpText } from './utils/cli.js';
+import { parseArguments, script, getHelpText, npmInsatallation, otherInstallations } from './utils/cli.js';
 import { logger } from './utils/logger.js';
 import { resolve } from './utils/promise.js';
 import type { Args, DisplayValue, Path } from './types';
@@ -37,6 +37,7 @@ if (args['--express']) {
   const passedFile: Args = 'server_express.js';
   const resultFile: Args = 'server.js';
   const fileCreated: Args = 'Express Server';
+  npmInsatallation('express', '')
   script(MainPath, passedFile, resultFile, fileCreated);
   registerClose(0);
 }
@@ -53,6 +54,9 @@ if (args['--flask']) {
   const passedFile: Args = 'server_flask.py';
   const resultFile: Args = 'server.py';
   const fileCreated: Args = 'Flask Server';
+  otherInstallations('pip', 'install', 'virtualenv')
+  otherInstallations('virtualenv', 'venv', '')
+  otherInstallations('pip', 'install', 'flask')
   script(MainPath, passedFile, resultFile, fileCreated);
   registerClose(0);
 }
@@ -69,6 +73,8 @@ if (args['--go']) {
   const passedFile: Args = 'server_go.go';
   const resultFile: Args = 'server.go';
   const fileCreated: Args = 'GO Server';
+  otherInstallations('git', 'init', '')
+  otherInstallations('go', 'mod', 'init')
   script(MainPath, passedFile, resultFile, fileCreated);
   registerClose(0);
 }
@@ -77,6 +83,7 @@ if (args['--rust']) {
   const passedFile: Args = 'server_rust.rs';
   const resultFile: Args = 'server.rs';
   const fileCreated: Args = 'Rust Server';
+  // Dedicated file structure use at your own risk
   script(MainPath, passedFile, resultFile, fileCreated);
   registerClose(0);
 }
